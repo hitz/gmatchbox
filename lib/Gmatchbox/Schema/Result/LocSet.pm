@@ -6,7 +6,10 @@ package Gmatchbox::Schema::Result::LocSet;
 use strict;
 use warnings;
 
-use base 'DBIx::Class::Core';
+use Moose;
+use MooseX::NonMoose;
+use namespace::autoclean;
+extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
@@ -88,13 +91,13 @@ __PACKAGE__->belongs_to(
   "experiment",
   "Gmatchbox::Schema::Result::Experiment",
   { experiment_id => "experiment_id" },
-  { on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hstuIN1kCQYb48EH+GQrKg
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-10 14:58:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zXS51DOQaG5ofGqeWaokow
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
+__PACKAGE__->meta->make_immutable;
 1;

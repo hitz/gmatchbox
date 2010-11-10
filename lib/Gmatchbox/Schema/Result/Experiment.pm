@@ -6,7 +6,10 @@ package Gmatchbox::Schema::Result::Experiment;
 use strict;
 use warnings;
 
-use base 'DBIx::Class::Core';
+use Moose;
+use MooseX::NonMoose;
+use namespace::autoclean;
+extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
@@ -84,9 +87,10 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cb2NZw3wbdtA5/kCi9h8sQ
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-10 14:58:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:FQFsMfyE1hTW33UD/pxx2w
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
+__PACKAGE__->meta->make_immutable;
 1;

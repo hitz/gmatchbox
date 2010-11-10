@@ -6,7 +6,10 @@ package Gmatchbox::Schema::Result::Loc;
 use strict;
 use warnings;
 
-use base 'DBIx::Class::Core';
+use Moose;
+use MooseX::NonMoose;
+use namespace::autoclean;
+extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
@@ -49,8 +52,9 @@ __PACKAGE__->table("loc");
 
 =head2 linear_coordinate_object_id
 
-  data_type: 'integer'
+  data_type: 'varchar'
   is_nullable: 1
+  size: 1024
 
 =cut
 
@@ -66,7 +70,7 @@ __PACKAGE__->add_columns(
   "loc_set_id",
   { data_type => "integer", is_foreign_key => 1, is_nullable => 0 },
   "linear_coordinate_object_id",
-  { data_type => "integer", is_nullable => 1 },
+  { data_type => "varchar", is_nullable => 1, size => 1024 },
 );
 __PACKAGE__->set_primary_key("loc_id");
 
@@ -84,7 +88,6 @@ __PACKAGE__->belongs_to(
   "loc_set",
   "Gmatchbox::Schema::Result::LocSet",
   { loc_set_id => "loc_set_id" },
-  { on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 =head2 loc_metadatas
@@ -103,9 +106,10 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:EMLxzyCyMs3mgfuZ6kN3xA
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-10 14:58:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:L/K7t1SY/Si6MQlHxOaT0A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
+__PACKAGE__->meta->make_immutable;
 1;

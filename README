@@ -1,1 +1,6 @@
 Run script/gmatchbox_server.pl to test the application.
+
+
+To Create Database Schema modules:
+
+script/gmatchbox_create.pl model DB DBIC::Schema Gmatchbox::Schema create=static dbi:mysql:gmatchbox gmod 1gmod1

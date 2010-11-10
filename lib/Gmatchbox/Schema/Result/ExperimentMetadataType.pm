@@ -6,7 +6,10 @@ package Gmatchbox::Schema::Result::ExperimentMetadataType;
 use strict;
 use warnings;
 
-use base 'DBIx::Class::Core';
+use Moose;
+use MooseX::NonMoose;
+use namespace::autoclean;
+extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
@@ -50,29 +53,11 @@ __PACKAGE__->add_columns(
 );
 __PACKAGE__->set_primary_key("experiment_metadata_type_id");
 
-=head1 RELATIONS
 
-=head2 experiment_metadatas
-
-Type: has_many
-
-Related object: L<Gmatchbox::Schema::Result::ExperimentMetadata>
-
-=cut
-
-__PACKAGE__->has_many(
-  "experiment_metadatas",
-  "Gmatchbox::Schema::Result::ExperimentMetadata",
-  {
-    "foreign.experiment_metadata_type_id" => "self.experiment_metadata_type_id",
-  },
-  { cascade_copy => 0, cascade_delete => 0 },
-);
-
-
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7muLJQyzNqIoAL0vYBNohQ
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-10 14:58:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:VYl3iQM39CUaytb9E5nenQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
+__PACKAGE__->meta->make_immutable;
 1;
