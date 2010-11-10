@@ -6,7 +6,10 @@ package Gmatchbox::Schema::Result::ExperimentMetadata;
 use strict;
 use warnings;
 
-use base 'DBIx::Class::Core';
+use Moose;
+use MooseX::NonMoose;
+use namespace::autoclean;
+extends 'DBIx::Class::Core';
 
 __PACKAGE__->load_components("InflateColumn::DateTime");
 
@@ -64,15 +67,31 @@ __PACKAGE__->set_primary_key("experiment_metadata_id");
 
 Type: belongs_to
 
-Related object: L<Gmatchbox::Schema::Result::ExperimentMetadataType>
+Related object: L<Gmatchbox::Schema::Result::ExperimentMetadata>
 
 =cut
 
 __PACKAGE__->belongs_to(
   "experiment_metadata_type",
-  "Gmatchbox::Schema::Result::ExperimentMetadataType",
-  { "experiment_metadata_type_id" => "experiment_metadata_type_id" },
-  { on_delete => "CASCADE", on_update => "CASCADE" },
+  "Gmatchbox::Schema::Result::ExperimentMetadata",
+  { experiment_metadata_id => "experiment_metadata_type_id" },
+);
+
+=head2 experiment_metadatas
+
+Type: has_many
+
+Related object: L<Gmatchbox::Schema::Result::ExperimentMetadata>
+
+=cut
+
+__PACKAGE__->has_many(
+  "experiment_metadatas",
+  "Gmatchbox::Schema::Result::ExperimentMetadata",
+  {
+    "foreign.experiment_metadata_type_id" => "self.experiment_metadata_id",
+  },
+  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 experiment
@@ -87,13 +106,13 @@ __PACKAGE__->belongs_to(
   "experiment",
   "Gmatchbox::Schema::Result::Experiment",
   { experiment_id => "experiment_id" },
-  { on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:heRMZ5YPKoh4m4Su5W8gBw
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-10 14:58:19
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7RO8MEnwSyhVym5p4nNA+A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
+__PACKAGE__->meta->make_immutable;
 1;
