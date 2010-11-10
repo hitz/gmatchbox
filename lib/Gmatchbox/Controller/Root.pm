@@ -45,6 +45,18 @@ sub default :Path {
     $c->response->status(404);
 }
 
+=head2 error_db
+    
+    DB error screen
+    
+=cut
+
+sub error_db : Chained('/') : PathPart('error_db') : Args(0) {
+	my ( $self, $c ) = @_;
+
+	$c->stash( template => 'error_db.tt2' );
+}
+
 =head2 end
 
 Attempt to render a view, if needed.

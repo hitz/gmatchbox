@@ -36,6 +36,12 @@ __PACKAGE__->config(
     name => 'Gmatchbox',
     # Disable deprecated behavior needed by old applications
     disable_component_resolution_regex_fallback => 1,
+    'View::JSON' => { 
+    #      allow_callback  => 1,    # defaults to 0
+    #      callback_param  => 'cb', # defaults to 'callback'
+    	 json_driver     => 'JSON::XS',
+         expose_stash    => qr/^json_/, # any var beginning with json
+    },
 );
 
 # Start the application
