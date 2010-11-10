@@ -1,4 +1,4 @@
-package gmatchbox::Schema::Result::Experiment;
+package Gmatchbox::Schema::Result::Experiment;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -12,7 +12,7 @@ __PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
 
-gmatchbox::Schema::Result::Experiment
+Gmatchbox::Schema::Result::Experiment
 
 =cut
 
@@ -57,13 +57,13 @@ __PACKAGE__->add_unique_constraint("name", ["name"]);
 
 Type: has_many
 
-Related object: L<gmatchbox::Schema::Result::ExperimentMetadata>
+Related object: L<Gmatchbox::Schema::Result::ExperimentMetadata>
 
 =cut
 
 __PACKAGE__->has_many(
   "experiment_metadatas",
-  "gmatchbox::Schema::Result::ExperimentMetadata",
+  "Gmatchbox::Schema::Result::ExperimentMetadata",
   { "foreign.experiment_id" => "self.experiment_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
@@ -72,20 +72,20 @@ __PACKAGE__->has_many(
 
 Type: has_many
 
-Related object: L<gmatchbox::Schema::Result::LocSet>
+Related object: L<Gmatchbox::Schema::Result::LocSet>
 
 =cut
 
 __PACKAGE__->has_many(
   "loc_sets",
-  "gmatchbox::Schema::Result::LocSet",
+  "Gmatchbox::Schema::Result::LocSet",
   { "foreign.experiment_id" => "self.experiment_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 13:01:12
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:+AcTqnNX3GykQLDnfwNpjg
+# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:cb2NZw3wbdtA5/kCi9h8sQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

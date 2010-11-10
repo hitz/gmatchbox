@@ -1,4 +1,4 @@
-package gmatchbox::Schema::Result::ExperimentMetadataType;
+package Gmatchbox::Schema::Result::ExperimentMetadataType;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -12,7 +12,7 @@ __PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
 
-gmatchbox::Schema::Result::ExperimentMetadataType
+Gmatchbox::Schema::Result::ExperimentMetadataType
 
 =cut
 
@@ -56,13 +56,13 @@ __PACKAGE__->set_primary_key("experiment_metadata_type_id");
 
 Type: has_many
 
-Related object: L<gmatchbox::Schema::Result::ExperimentMetadata>
+Related object: L<Gmatchbox::Schema::Result::ExperimentMetadata>
 
 =cut
 
 __PACKAGE__->has_many(
   "experiment_metadatas",
-  "gmatchbox::Schema::Result::ExperimentMetadata",
+  "Gmatchbox::Schema::Result::ExperimentMetadata",
   {
     "foreign.experiment_metadata_type_id" => "self.experiment_metadata_type_id",
   },
@@ -70,8 +70,8 @@ __PACKAGE__->has_many(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 13:07:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:WZBc8vgPYD/VJSYjtPJ7iQ
+# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7muLJQyzNqIoAL0vYBNohQ
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -1,4 +1,4 @@
-package gmatchbox::Schema::Result::ExperimentMetadata;
+package Gmatchbox::Schema::Result::ExperimentMetadata;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -12,7 +12,7 @@ __PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
 
-gmatchbox::Schema::Result::ExperimentMetadata
+Gmatchbox::Schema::Result::ExperimentMetadata
 
 =cut
 
@@ -64,13 +64,13 @@ __PACKAGE__->set_primary_key("experiment_metadata_id");
 
 Type: belongs_to
 
-Related object: L<gmatchbox::Schema::Result::ExperimentMetadataType>
+Related object: L<Gmatchbox::Schema::Result::ExperimentMetadataType>
 
 =cut
 
 __PACKAGE__->belongs_to(
   "experiment_metadata_type",
-  "gmatchbox::Schema::Result::ExperimentMetadataType",
+  "Gmatchbox::Schema::Result::ExperimentMetadataType",
   { "experiment_metadata_type_id" => "experiment_metadata_type_id" },
   { on_delete => "CASCADE", on_update => "CASCADE" },
 );
@@ -79,20 +79,20 @@ __PACKAGE__->belongs_to(
 
 Type: belongs_to
 
-Related object: L<gmatchbox::Schema::Result::Experiment>
+Related object: L<Gmatchbox::Schema::Result::Experiment>
 
 =cut
 
 __PACKAGE__->belongs_to(
   "experiment",
-  "gmatchbox::Schema::Result::Experiment",
+  "Gmatchbox::Schema::Result::Experiment",
   { experiment_id => "experiment_id" },
   { on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 13:07:51
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:SxopZtSMhV06eSjNJx8JOQ
+# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:heRMZ5YPKoh4m4Su5W8gBw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

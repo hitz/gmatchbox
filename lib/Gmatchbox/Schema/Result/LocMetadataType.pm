@@ -1,4 +1,4 @@
-package gmatchbox::Schema::Result::LocMetadataType;
+package Gmatchbox::Schema::Result::LocMetadataType;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -12,7 +12,7 @@ __PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
 
-gmatchbox::Schema::Result::LocMetadataType
+Gmatchbox::Schema::Result::LocMetadataType
 
 =cut
 
@@ -56,20 +56,20 @@ __PACKAGE__->set_primary_key("loc_metadata_type_id");
 
 Type: has_many
 
-Related object: L<gmatchbox::Schema::Result::LocMetadata>
+Related object: L<Gmatchbox::Schema::Result::LocMetadata>
 
 =cut
 
 __PACKAGE__->has_many(
   "loc_metadatas",
-  "gmatchbox::Schema::Result::LocMetadata",
+  "Gmatchbox::Schema::Result::LocMetadata",
   { "foreign.loc_metadata_type_id" => "self.loc_metadata_type_id" },
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 12:38:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:RgXGV5PLhXuW+/cKxHLYKQ
+# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:/T+DbNHnUF5mHI3PfCuhAA
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
