@@ -1,4 +1,4 @@
-package gmatchbox::Schema::Result::LocMetadata;
+package Gmatchbox::Schema::Result::LocMetadata;
 
 # Created by DBIx::Class::Schema::Loader
 # DO NOT MODIFY THE FIRST PART OF THIS FILE
@@ -12,7 +12,7 @@ __PACKAGE__->load_components("InflateColumn::DateTime");
 
 =head1 NAME
 
-gmatchbox::Schema::Result::LocMetadata
+Gmatchbox::Schema::Result::LocMetadata
 
 =cut
 
@@ -63,13 +63,13 @@ __PACKAGE__->set_primary_key("loc_metadata_id");
 
 Type: belongs_to
 
-Related object: L<gmatchbox::Schema::Result::Loc>
+Related object: L<Gmatchbox::Schema::Result::Loc>
 
 =cut
 
 __PACKAGE__->belongs_to(
   "loc",
-  "gmatchbox::Schema::Result::Loc",
+  "Gmatchbox::Schema::Result::Loc",
   { loc_id => "loc_id" },
   { on_delete => "CASCADE", on_update => "CASCADE" },
 );
@@ -78,20 +78,20 @@ __PACKAGE__->belongs_to(
 
 Type: belongs_to
 
-Related object: L<gmatchbox::Schema::Result::LocMetadataType>
+Related object: L<Gmatchbox::Schema::Result::LocMetadataType>
 
 =cut
 
 __PACKAGE__->belongs_to(
   "loc_metadata_type",
-  "gmatchbox::Schema::Result::LocMetadataType",
+  "Gmatchbox::Schema::Result::LocMetadataType",
   { loc_metadata_type_id => "loc_metadata_type_id" },
   { on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 12:38:59
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:Xv727HqS5ZEVzxOQ2+zxSA
+# Created by DBIx::Class::Schema::Loader v0.07000 @ 2010-11-10 15:21:39
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:p1dG3bpg3rsxJm3gf1ti6A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration
