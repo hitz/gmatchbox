@@ -1,0 +1,14 @@
+
+= Development TODO list for Gmatchbox =
+
+== Configuration and Installation ==
+
+* Need to abstract DB connection for Model::DBIC
+* Support for external feature DB (prereq; DBIC system for it)
+** Adaptor
+*** Bio::DB::SeqFeature::Store
+*** Chado (BCS)
+
+== Refactor ==
+
+* Controllers need to be refactored into a base class
