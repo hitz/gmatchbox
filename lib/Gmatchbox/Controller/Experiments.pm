@@ -49,7 +49,7 @@ sub index :Path :Args(0) {
    base chained url /experiments/X/
 
 =cut
-sub base : Chained('/') : PathPart('experiments') : CaptureArgs(0) {
+sub base : Chained('/') : PathPart('experiment') : CaptureArgs(0) {
 	my ( $self, $c ) = @_;
 	$self->get_rs($c);
 	
@@ -57,7 +57,7 @@ sub base : Chained('/') : PathPart('experiments') : CaptureArgs(0) {
 
 =head2 experiment_name
 
-   URL for experiments/name/? 
+   URL for experiment/name/? 
    return json object for specified experiment by name
    
 =cut
@@ -74,7 +74,7 @@ sub experiment_name : Chained('base') : PathPart('name') : Args(1) {
 
 =head2 experiment_id
 
-   URL for experiments/id/? 
+   URL for experiment/id/? 
    return json object for specified experiment by id.
    How you got that id?  I dunno.
    

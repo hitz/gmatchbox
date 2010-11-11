@@ -4,6 +4,8 @@
 == Configuration and Installation ==
 
 * Need to abstract DB connection for Model::DBIC
+** support sqllite for gmatchbox schema
+** postgres does not use longblob - uses bytea; need to SQL::Translator for various RDB flavors at compile/configure time
 * Support for external feature DB (prereq; DBIC system for it)
 ** Adaptor
 *** Bio::DB::SeqFeature::Store
@@ -11,4 +13,4 @@
 
 == Refactor ==
 
-* Controllers need to be refactored into a base class
+* Controllers need to be refactored into a base class.

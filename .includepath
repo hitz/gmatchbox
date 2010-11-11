@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includepath>
+  <includepathentry path="/opt/local/lib/perl5/site_perl/5.8.9/darwin-2level" />
+  <includepathentry path="/opt/local/lib/perl5/site_perl/5.8.9&#xA;/opt/local/lib/perl5/site_perl&#xA;/opt/local/lib/perl5/vendor_perl/5.8.9/darwin-2level&#xA;/opt/local/lib/perl5/vendor_perl/5.8.9&#xA;/opt/local/lib/perl5/vendor_perl&#xA;/opt/local/lib/perl5/5.8.9/darwin-2level&#xA;/opt/local/lib/perl5/5.8.9&#xA;" />
+  <includepathentry path="/opt/local/lib/perl5/vendor_perl/5.8.9/darwin-2level&#xA;" />
+  <includepathentry path="/opt/local/lib/perl5/vendor_perl/5.8.9&#xA;" />
+  <includepathentry path="/opt/local/lib/perl5/vendor_perl&#xA;" />
+  <includepathentry path="/opt/local/lib/perl5/5.8.9/darwin-2level&#xA;" />
+  <includepathentry path="/opt/local/lib/perl5/5.8.9&#xA;" />
+</includepath>
+
