@@ -11,6 +11,11 @@
 *** Bio::DB::SeqFeature::Store
 *** Chado (BCS)
 
+== Object adaptors ==
+
+* Need to create object adaptors to convert DBIx::Class HashRefs to consumable JSON objects
+* Perhaps drop HashRefInflator and add methods to Result Source classes that return hashes for View::JSON
+
 == Refactor ==
 
-* Controllers need to be refactored into a base class.
+* Controllers need to be refactored into a base class, check doc/dispatch_table.xls

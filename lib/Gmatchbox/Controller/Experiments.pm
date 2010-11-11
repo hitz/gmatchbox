@@ -55,24 +55,29 @@ sub base : Chained('/') : PathPart('experiment') : CaptureArgs(0) {
 	
 }
 
-=head2 experiment_name
+=head2 name
 
    URL for experiment/name/? 
    return json object for specified experiment by name
    
 =cut
 
-sub experiment_name : Chained('base') : PathPart('name') : Args(1) {
+sub name : Chained('base')  : Args(1) {
 	my ($self, $c, $name) = @_;
 	
-	$c->stash(json_experiment => $c->stash->{resultset}->find({name => { '-like' => "%$name%" }}));
+	$c->stash(json_experiment => $c->stash->{resultset}->find({name => { '-like' => "%$name%" }},
+															  {prefetch => {
+															  		'experiment_metadata' =>
+															  		 'experiment_metadata_type'}
+															  },
+															  ));
 
 	$c->detach('/error_db') if !$c->stash->{json_experiment};
 	$c->forward('View::JSON');
 	
 }
 
-=head2 experiment_id
+=head2 id
 
    URL for experiment/id/? 
    return json object for specified experiment by id.
@@ -80,10 +85,51 @@ sub experiment_name : Chained('base') : PathPart('name') : Args(1) {
    
 =cut
 
-sub experiment_id : Chained('base') : PathPart('id') : Args(1) {
+sub id : Chained('base') : Args(1) {
 	my ($self, $c, $id) = @_;
 
-	$c->stash(json_experiment => $c->stash->{resultset}->find({experiment_id => $id}));
+	$c->stash(json_experiment => $c->stash->{resultset}->find({experiment_id => $id},
+															  {prefetch => {
+															  		'experiment_metadata' =>
+															  		 'experiment_metadata_type'}
+															  },
+															  ));
+
+	
+	$c->detach('/error_db') if !$c->stash->{json_experiment};
+	$c->forward('View::JSON');
+	
+}
+
+
+=head2 id_chain
+
+   URL for experiment/id/?/lcb
+   return json object for specified experiment by id.
+   How you got that id?  I dunno.
+   
+=cut
+
+sub id_chain : Chained('base') : PathPart('id') : CaptureArgs(1) {
+	my ($self, $c, $id) = @_;
+
+	$c->stash('select' => { experiment_id => $id });
+	
+}
+
+=head2 lcb_id
+
+   URL for experiment/(id|name)/?/lcb/ 
+   return json objects for specified lcbs
+   
+=cut
+
+sub lcb_id : Chained('name_chain') : PathPart('lcb') Args(0) {
+	my ($self, $c) = @_;
+
+	$c->stash(json_experiment => $c->stash->{resultset}->find($c->stash->{'select'},
+															  {prefetch => 'locs'},
+															  ));
 	
 	$c->detach('/error_db') if !$c->stash->{json_experiment};
 	$c->forward('View::JSON');

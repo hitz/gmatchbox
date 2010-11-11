@@ -55,14 +55,14 @@ sub base : Chained('/') : PathPart('lcb') : CaptureArgs(0) {
 	
 }
 
-=head2 lcb_name
+=head2 name
 
    URL for lcb/name/? 
    return json object for specified lcb by name
    
 =cut
 
-sub lcb_name : Chained('base') : PathPart('name') : Args(1) {
+sub name : Chained('base') : Args(1) {
 	my ($self, $c, $name) = @_;
 	
 	$c->stash(json_lcb => $c->stash->{resultset}->find({name => { '-like' => "%$name%" }},
@@ -73,7 +73,7 @@ sub lcb_name : Chained('base') : PathPart('name') : Args(1) {
 	
 }
 
-=head2 lcb_id
+=head2 id
 
    URL for lcb/id/? 
    return json object for specified lcb by id.
@@ -81,16 +81,17 @@ sub lcb_name : Chained('base') : PathPart('name') : Args(1) {
    
 =cut
 
-sub lcb_id : Chained('base') : PathPart('id') : Args(1) {
+sub id : Chained('base') : PathPart('id') : Args(1) {
 	my ($self, $c, $id) = @_;
 
 	$c->stash(json_lcb => $c->stash->{resultset}->find({loc_set_id => $id},
-														 {prefetch => { 'locs' => { 'loc_metadatas'} }}));
+													   {prefetch => 'locs' }));
 	
 	$c->detach('/error_db') if !$c->stash->{json_lcb};
 	$c->forward('View::JSON');
 	
 }
+
 
 =head1 AUTHOR
 
