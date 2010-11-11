@@ -3,7 +3,6 @@
 use strict;
 use Data::Dumper;
 use Getopt::Long;
-use lib "/home/elyons/projects/GMatchbox/gmatchbox/lib";
 use Gmatchbox::Model::DB;
 use Gmatchbox;
 use vars qw($DEBUG $help $file $exp_name $exp_desc $mb $algo_name);
@@ -34,6 +33,7 @@ OPTIONS:
 
  -exp_desc          description of experiment
 
+ -algo_name	    Name of algorithm used in blast comparison (DEFAULT: MegaBlast)
 };
     exit();
   }
