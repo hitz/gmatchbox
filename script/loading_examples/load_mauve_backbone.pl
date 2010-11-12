@@ -26,7 +26,7 @@ if ($help)
     print qq{
 Welcome to $0.
 
-Usage: $0 -file <tab delimited blast file to parse> -exp_name = <your_exp_name>
+Usage: $0 -file <path/name of mauve.backbone file to parse> -exp_name = <your_exp_name>
 
 OPTIONS:
  -file | -f         name of file with blast hits in tabular format
@@ -53,7 +53,8 @@ my $exp_mdt = $mb->resultset('ExperimentMetadataType')->find_or_create({name=>'A
 $exp->add_to_experiment_metadatas({value=>"$algo_name", experiment_metadata_type_id=>$exp_mdt->id}) if $go;
 
 #create metadata type for locs
-my $pidt = $mb->resultset('LocMetadataType')->find_or_create({name=>'Percent ID'}) if $go;
+#example, not used in this program
+#my $pidt = $mb->resultset('LocMetadataType')->find_or_create({name=>'Percent ID'}) if $go;
 
 
 process_file(file=>$file, exp=>$exp);
