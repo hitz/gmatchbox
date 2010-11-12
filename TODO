@@ -6,7 +6,8 @@
 * Need to abstract DB connection for Model::DBIC
 ** support sqllite for gmatchbox schema
 ** postgres does not use longblob - uses bytea; need to SQL::Translator for various RDB flavors at compile/configure time
-* Support for external feature DB (prereq; DBIC system for it)
+* Support for external feature DB (prereq; DBIC system for it).
+* myapp_local.conf - Catalyst::Plugin::ConfigLoader create at start up time.
 ** Adaptor
 *** Bio::DB::SeqFeature::Store
 *** Chado (BCS)

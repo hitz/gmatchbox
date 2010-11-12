@@ -67,8 +67,8 @@ sub name : Chained('base')  : Args(1) {
 	
 	$c->stash(json_experiment => $c->stash->{resultset}->find({name => { '-like' => "%$name%" }},
 															  {prefetch => {
-															  		'experiment_metadata' =>
-															  		 'experiment_metadata_type'}
+															  		'experiment_metadatas' =>
+															  		 'experiment_metadata_types'}
 															  },
 															  ));
 
@@ -90,8 +90,8 @@ sub id : Chained('base') : Args(1) {
 
 	$c->stash(json_experiment => $c->stash->{resultset}->find({experiment_id => $id},
 															  {prefetch => {
-															  		'experiment_metadata' =>
-															  		 'experiment_metadata_type'}
+															  		'experiment_metadatas' =>
+															  		 'experiment_metadata_types'}
 															  },
 															  ));
 
