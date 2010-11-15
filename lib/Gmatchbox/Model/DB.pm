@@ -4,10 +4,11 @@ use strict;
 use base 'Catalyst::Model::DBIC::Schema';
 
 __PACKAGE__->config(
+    default_view => 'View::JSON',
     schema_class => 'Gmatchbox::Schema',
     
     connect_info => {
-        dsn => 'dbi:mysql:gmatchbox;port=3307',
+        dsn => 'dbi:mysql:gmatchbox',
         user => 'gmod',
         password => '1gmod1',
     }

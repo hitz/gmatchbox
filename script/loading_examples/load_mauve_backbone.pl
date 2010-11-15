@@ -8,13 +8,13 @@ use Gmatchbox;
 use vars qw($DEBUG $help $file $exp_name $exp_desc $mb $algo_name $go);
 
 GetOptions(
-           "file|f=s"=>\$file,
-           "help|h"=>\$help,
+	       "file|f=s"=>\$file,
+		   "help|h"=>\$help,
            "exp_name=s"=>\$exp_name,
            "exp_desc=s"=>\$exp_desc,
            "algo_name=s"=>\$algo_name,
-	   "go"=>\$go,
-	   "debug=i"=>\$DEBUG,
+	   	   "go"=>\$go,
+	       "debug=i"=>\$DEBUG,
           );
 
 

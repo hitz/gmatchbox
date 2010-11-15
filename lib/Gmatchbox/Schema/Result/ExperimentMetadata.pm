@@ -73,8 +73,9 @@ Related object: L<Gmatchbox::Schema::Result::ExperimentMetadata>
 
 __PACKAGE__->belongs_to(
   "experiment_metadata_type",
-  "Gmatchbox::Schema::Result::ExperimentMetadata",
-  { experiment_metadata_id => "experiment_metadata_type_id" },
+  "Gmatchbox::Schema::Result::ExperimentMetadataType",
+  { "experiment_metadata_id" => "experiment_metadata_type_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 =head2 experiment_metadatas
@@ -106,11 +107,12 @@ __PACKAGE__->belongs_to(
   "experiment",
   "Gmatchbox::Schema::Result::Experiment",
   { experiment_id => "experiment_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-10 14:58:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:7RO8MEnwSyhVym5p4nNA+A
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-12 15:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KrZR9U6AnmnE16MqO84w+A
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

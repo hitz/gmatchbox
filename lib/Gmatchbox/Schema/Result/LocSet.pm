@@ -60,7 +60,6 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_nullable => 1, size => 1054 },
 );
 __PACKAGE__->set_primary_key("loc_set_id");
-__PACKAGE__->add_unique_constraint("name", ["name"]);
 
 =head1 RELATIONS
 
@@ -91,11 +90,12 @@ __PACKAGE__->belongs_to(
   "experiment",
   "Gmatchbox::Schema::Result::Experiment",
   { experiment_id => "experiment_id" },
+  { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-10 14:58:19
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:zXS51DOQaG5ofGqeWaokow
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-12 15:45:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:H5OUeF4RJhrn7Ut44CaO4g
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -54,6 +54,7 @@ sub default :Path {
 sub error_db : Chained('/') : PathPart('error_db') : Args(0) {
 	my ( $self, $c ) = @_;
 
+	$c->stash( current_view => 'HTML');
 	$c->stash( template => 'error_db.tt2' );
 }
 

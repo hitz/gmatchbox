@@ -46,7 +46,7 @@ sub index :Path :Args(0) {
 
 =head2 base
 
-   base chained url /experiments/X/
+   base chained url /experiment/X/
 
 =cut
 sub base : Chained('/') : PathPart('experiment') : CaptureArgs(0) {
@@ -68,7 +68,7 @@ sub name : Chained('base')  : Args(1) {
 	$c->stash(json_experiment => $c->stash->{resultset}->find({name => { '-like' => "%$name%" }},
 															  {prefetch => {
 															  		'experiment_metadatas' =>
-															  		 'experiment_metadata_types'}
+															  		 'experiment_metadata_type'}
 															  },
 															  ));
 
@@ -77,21 +77,23 @@ sub name : Chained('base')  : Args(1) {
 	
 }
 
-=head2 id
+=head2 experiment
 
-   URL for experiment/id/? 
+   URL for experiment/? 
    return json object for specified experiment by id.
    How you got that id?  I dunno.
    
 =cut
 
-sub id : Chained('base') : Args(1) {
+sub experiment : Chained('base') :PathPart(''): Args(1) {
+	
 	my ($self, $c, $id) = @_;
-
 	$c->stash(json_experiment => $c->stash->{resultset}->find({experiment_id => $id},
-															  {prefetch => {
+															  {prefetch => 
+															  	{
 															  		'experiment_metadatas' =>
-															  		 'experiment_metadata_types'}
+															  		 'experiment_metadata_type'
+																}
 															  },
 															  ));
 
@@ -104,37 +106,73 @@ sub id : Chained('base') : Args(1) {
 
 =head2 id_chain
 
-   URL for experiment/id/?/lcb
+   URL for experiment/?/blah
    return json object for specified experiment by id.
    How you got that id?  I dunno.
    
 =cut
 
-sub id_chain : Chained('base') : PathPart('id') : CaptureArgs(1) {
+sub id_chain : Chained('base') : PathPart('') : CaptureArgs(1) {
 	my ($self, $c, $id) = @_;
 
 	$c->stash('select' => { experiment_id => $id });
 	
 }
 
-=head2 lcb_id
+=head2 lcb
 
-   URL for experiment/(id|name)/?/lcb/ 
+   URL for experiment/?/lcb/ 
    return json objects for specified lcbs
    
 =cut
 
-sub lcb_id : Chained('name_chain') : PathPart('lcb') Args(0) {
+sub lcb : Chained('id_chain') : Args(0) {
 	my ($self, $c) = @_;
 
 	$c->stash(json_experiment => $c->stash->{resultset}->find($c->stash->{'select'},
-															  {prefetch => 'locs'},
+															  {prefetch => 'loc_sets'},
 															  ));
 	
 	$c->detach('/error_db') if !$c->stash->{json_experiment};
 	$c->forward('View::JSON');
 	
 }
+
+=head2 lcb_chain
+
+   URL for experiment/?/lcb/blah
+   return json objects for specified lcbs
+   
+=cut
+
+sub lcb_chain: Chained('id_chain') : PathPart('lcb') : CaptureArgs(0) {
+	my ($self, $c) = @_;
+
+}
+
+
+=head2 loc
+
+   URL for experiment/?/lcb/ 
+   return json objects for specified lcbs
+   
+=cut
+
+sub loc : Chained('lcb_chain') : Args(0) {
+	my ($self, $c) = @_;
+	
+	$c->stash(json_experiment => $c->stash->{resultset}->find($c->stash->{'select'},
+															  {prefetch => {
+															  				'loc_sets' => 'locs'
+															  				},
+															  }
+															  ));
+	
+	$c->detach('/error_db') if !$c->stash->{json_experiment};
+	$c->forward('View::JSON');
+	
+}
+
 
 =head1 AUTHOR
 
