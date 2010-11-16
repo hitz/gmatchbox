@@ -31,67 +31,85 @@ sub get_rs {
 	
 }
 
-=head2 index
-
-Defaults to list of whole database.
-=cut
-
-sub index :Path :Args(0) {
-    my ( $self, $c ) = @_;
-
-	$self->get_rs($c);
-	$c->stash(json_lcbs => [ $c->stash->{resultset}->all ]);
-	$c->forward('View::JSON');
-}
-
 =head2 base
 
    base chained url /lcb/X/
 
 =cut
-sub base : Chained('/') : PathPart('lcb') : CaptureArgs(0) {
-	my ( $self, $c ) = @_;
+sub base : Chained('/') : PathPart('lcb') : CaptureArgs(1) {
+	my ( $self, $c, $id ) = @_;
 	$self->get_rs($c);
-	
-}
-
-=head2 name
-
-   URL for lcb/name/? 
-   return json object for specified lcb by name
-   
-=cut
-
-sub name : Chained('base') : Args(1) {
-	my ($self, $c, $name) = @_;
-	
-	$c->stash(json_lcb => $c->stash->{resultset}->find({name => { '-like' => "%$name%" }},
-														 {prefetch => { 'locs' => { 'loc_metadatas'} }}));
-
-	$c->detach('/error_db') if !$c->stash->{json_lcb};
-	$c->forward('View::JSON');
-	
+	$c->stash(search => { loc_set_id => $id });
 }
 
 =head2 id
 
-   URL for lcb/id/? 
-   return json object for specified lcb by id.
-   How you got that id?  I dunno.
-   
+   base  url /lcb/X/
+
 =cut
+sub id : Chained('base') : PathPart('') : Args(0) {
+	my ( $self, $c) = @_;
+	
+	$c->stash(json_lcb => $c->stash->{resultset}->find($c->stash->{'select'}));
+	
+	$c->detach('/error_db') if !$c->stash->{json_lcb};
+	$c->forward('View::JSON');
+	
+	
+}
 
-sub id : Chained('base') : PathPart('id') : Args(1) {
-	my ($self, $c, $id) = @_;
+=head2 loc
 
-	$c->stash(json_lcb => $c->stash->{resultset}->find({loc_set_id => $id},
-													   {prefetch => 'locs' }));
+   base  url /lcb/X/loc
+
+=cut
+sub loc: Chained('base')  : Args(0) {
+	my ( $self, $c) = @_;
+	
+	$c->stash(json_lcb => $c->stash->{resultset}->find($c->stash->{'select'},
+													   {prefetch => 'locs' }
+													  ));
 	
 	$c->detach('/error_db') if !$c->stash->{json_lcb};
 	$c->forward('View::JSON');
 	
 }
 
+=head2 loc_chain
+
+   URL for /lcb/x/loc...
+   return json objects for specified lcbs
+   
+=cut
+
+sub loc_chain : Chained('base') : PathPart('loc') : CaptureArgs(0) {
+	my ($self, $c) = @_;
+
+}
+
+=head2 metadata
+
+   URL for experiment/?/lcb/loc/metadata
+   return json objects for specified lcbs
+   
+=cut
+
+sub metadata : Chained('loc_chain') : Args(0) {
+	my ($self, $c) = @_;
+	
+	$c->stash(json_lcb => $c->stash->{resultset}->find($c->stash->{'select'},
+															  {prefetch => {
+															  				'locs' => {
+															  							'loc_metadatas' => 'loc_metadata_type'
+															  						  }
+															  				},
+															  }
+															  ));
+	
+	$c->detach('/error_db') if !$c->stash->{json_lcb};
+	$c->forward('View::JSON');
+	
+}
 
 =head1 AUTHOR
 

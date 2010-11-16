@@ -43,7 +43,7 @@ sub index :Path :Args(0) {
 
 =head2 base
 
-   base chained url /experiment/X/
+   base chained url /loc/X/
 
 =cut
 sub base : Chained('/') : PathPart('loc') : CaptureArgs(1) {
@@ -54,15 +54,15 @@ sub base : Chained('/') : PathPart('loc') : CaptureArgs(1) {
 
 =head2 id
 
-   base  url /experiment/X/
+   base  url /loc/X/
 
 =cut
 sub id : Chained('base') : PathPart('') : Args(0) {
 	my ( $self, $c) = @_;
 	
-	$c->stash(json_experiment => $c->stash->{resultset}->find($c->stash->{'select'}));
+	$c->stash(json_loc => $c->stash->{resultset}->find($c->stash->{'select'}));
 	
-	$c->detach('/error_db') if !$c->stash->{json_experiment};
+	$c->detach('/error_db') if !$c->stash->{json_loc};
 	$c->forward('View::JSON');
 	
 	
@@ -70,20 +70,20 @@ sub id : Chained('base') : PathPart('') : Args(0) {
 
 =head2 metadata
 
-   base  url /experiment/X/metadata
+   base  url /loc/X/metadata
 
 =cut
 sub metadata: Chained('base')  : Args(0) {
 	my ( $self, $c) = @_;
 	
-	$c->stash(json_experiment => $c->stash->{resultset}->find($c->stash->{'select'},
-															  {prefetch => 
-															  	{'loc_metadatas' =>
-															  	 	'loc_metadata_type'}
+	$c->stash(json_loc => $c->stash->{resultset}->find($c->stash->{'select'},
+													   {prefetch => 
+															  {'loc_metadatas' =>
+															  	 'loc_metadata_type'}
 															  }
-															  ));
+													   ));
 	
-	$c->detach('/error_db') if !$c->stash->{json_experiment};
+	$c->detach('/error_db') if !$c->stash->{json_loc};
 	$c->forward('View::JSON');
 	
 }
