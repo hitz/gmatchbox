@@ -67,32 +67,15 @@ __PACKAGE__->set_primary_key("experiment_metadata_id");
 
 Type: belongs_to
 
-Related object: L<Gmatchbox::Schema::Result::ExperimentMetadata>
+Related object: L<Gmatchbox::Schema::Result::ExperimentMetadataType>
 
 =cut
 
 __PACKAGE__->belongs_to(
   "experiment_metadata_type",
   "Gmatchbox::Schema::Result::ExperimentMetadataType",
-  { "experiment_metadata_id" => "experiment_metadata_type_id" },
+  { "experiment_metadata_type_id" => "experiment_metadata_type_id" },
   { is_deferrable => 1, on_delete => "CASCADE", on_update => "CASCADE" },
-);
-
-=head2 experiment_metadatas
-
-Type: has_many
-
-Related object: L<Gmatchbox::Schema::Result::ExperimentMetadata>
-
-=cut
-
-__PACKAGE__->has_many(
-  "experiment_metadatas",
-  "Gmatchbox::Schema::Result::ExperimentMetadata",
-  {
-    "foreign.experiment_metadata_type_id" => "self.experiment_metadata_id",
-  },
-  { cascade_copy => 0, cascade_delete => 0 },
 );
 
 =head2 experiment
@@ -111,8 +94,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-12 15:45:10
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:KrZR9U6AnmnE16MqO84w+A
+# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-11-15 17:27:28
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QUJlqtLkY2FUg0BaRMLUSw
 
 
 # You can replace this text with custom content, and it will be preserved on regeneration

@@ -173,7 +173,44 @@ sub loc : Chained('lcb_chain') : Args(0) {
 	
 }
 
+=head2 loc_chain
 
+   URL for experiment/?/lcb/loc...
+   return json objects for specified lcbs
+   
+=cut
+
+sub loc_chain : Chained('lcb_chain') : PathPart('loc') : CaptureArgs(0) {
+	my ($self, $c) = @_;
+
+}
+
+=head2 metadata
+
+   URL for experiment/?/lcb/loc/metadata
+   return json objects for specified lcbs
+   
+=cut
+
+sub metadata : Chained('loc_chain') : Args(0) {
+	my ($self, $c) = @_;
+	
+	$c->stash(json_experiment => $c->stash->{resultset}->find($c->stash->{'select'},
+															  {prefetch => {
+															  				'loc_sets' => {
+															  						'locs' => {
+															  							'loc_metadatas' => 'loc_metadata_type'
+															  						}
+															  				    } 
+															  				},
+															  }
+															  ));
+	
+	$c->detach('/error_db') if !$c->stash->{json_experiment};
+	$c->forward('View::JSON');
+	
+}
+	
 =head1 AUTHOR
 
 Ben Hitz
