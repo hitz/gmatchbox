@@ -39,7 +39,7 @@ sub get_rs {
 sub base : Chained('/') : PathPart('lcb') : CaptureArgs(1) {
 	my ( $self, $c, $id ) = @_;
 	$self->get_rs($c);
-	$c->stash(search => { loc_set_id => $id });
+	$c->stash(select => { loc_set_id => $id });
 }
 
 =head2 id
