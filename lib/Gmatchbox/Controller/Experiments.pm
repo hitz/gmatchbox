@@ -65,7 +65,7 @@ sub base : Chained('/') : PathPart('experiment') : CaptureArgs(0) {
 sub name : Chained('base')  : Args(1) {
 	my ($self, $c, $name) = @_;
 	
-	$c->stash(json_experiment => $c->stash->{resultset}->find({name => { '-like' => "%$name%" }},
+	$c->stash(json_experiment => $c->stash->{resultset}->search({name => { '-like' => "%$name%" }},
 															  {prefetch => {
 															  		'experiment_metadatas' =>
 															  		 'experiment_metadata_type'}
