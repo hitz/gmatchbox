@@ -42,6 +42,13 @@ __PACKAGE__->config(
     	 json_driver     => 'JSON::XS',
          expose_stash    => qr/^json_/, # any var beginning with json
     },
+	render_die => 1,
+	# Change default TT extension
+    TEMPLATE_EXTENSION => '.tt2',
+    # Set the location for TT files
+    INCLUDE_PATH => [
+    	Gmatchbox->path_to( 'root' ),
+    	],
 );
 
 # Start the application

@@ -60,7 +60,7 @@ my $firstLcb = {
 
 my $req = request('/experiments');
 ok( $req->is_success, '/experiments success' );
-is( scalar from_json($req->content)->{json_experiments}, $numExperiments, "/experiments returns correct number" );
+is( scalar @{ from_json($req->content)->{json_experiments} }, $numExperiments, "/experiments returns correct number" );
 $req = request("/experiment/$tExpId");
 ok( $req->is_success, '/experiment/* success' );
 is_deeply( from_json($req->content), $expData, '/experiment/* returns correct JSON object');
@@ -77,6 +77,6 @@ ok( $req->is_success, '/experiment/*/lcb success' );
 $req = request("/experiment/$tExpId/lcb/loc");
 ok( $req->is_success, '/experiment/*/lcb/loc success' );
 #TODO test that the first loc looks like a loc
-ok( request("/experiment/$tExpId/lcb/loc/metadata")$req->is_success, '/experiment/*/lcb/loc/metadata success' );
+ok( request("/experiment/$tExpId/lcb/loc/metadata")->is_success, '/experiment/*/lcb/loc/metadata success' );
 # Don't bother testing metadata; tested in controller_LOC.t
 done_testing();

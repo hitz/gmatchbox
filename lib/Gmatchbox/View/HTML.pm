@@ -5,15 +5,6 @@ use warnings;
 
 use base 'Catalyst::View::TT';
 
-__PACKAGE__->config(
-	render_die => 1,
-	# Change default TT extension
-    TEMPLATE_EXTENSION => '.tt2',
-    # Set the location for TT files
-    INCLUDE_PATH => [
-    	Gmatchbox->path_to( 'root' ),
-    	],
-);
 
 =head1 NAME
 
